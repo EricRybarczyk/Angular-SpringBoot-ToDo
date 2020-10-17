@@ -4,10 +4,19 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class HardcodedAuthenticationService {
-
+  static KEY_AUTHENTICATED_USER = 'authenticatedUser';
   constructor() { }
 
   authenticate(username, password): boolean {
-    return username === 'username' && password === 'ng10';
+    if (username === 'username' && password === 'ng10') {
+      sessionStorage.setItem(HardcodedAuthenticationService.KEY_AUTHENTICATED_USER, username);
+      return true;
+    }
+    return false;
+  }
+
+  isUserAuthenticated(): boolean {
+    const user = sessionStorage.getItem(HardcodedAuthenticationService.KEY_AUTHENTICATED_USER);
+    return !(user === null);
   }
 }

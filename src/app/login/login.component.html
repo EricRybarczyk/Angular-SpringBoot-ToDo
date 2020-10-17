@@ -15,8 +15,8 @@
           </div>
           <div class="form-group">
             <button (click)="handleLogin()" class="btn btn-primary">Login</button>
-            <span *ngIf="invalidLogin" class="alert alert-warning"><small>{{validationErrorMessage}}</small></span>
           </div>
+          <div *ngIf="invalidLogin" class="alert alert-warning">{{validationErrorMessage}}</div>
         </form>
       </div>
       <div class="col=md-6">

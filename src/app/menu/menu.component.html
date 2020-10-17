@@ -5,12 +5,12 @@
 
     <ul class="navbar-nav">
       <li><a routerLink="/welcome/username" class="nav-link">Home</a></li>
-      <li><a routerLink="/todos" class="nav-link">ToDo List</a></li>
+      <li><a *ngIf="authenticationService.isUserAuthenticated()" routerLink="/todos" class="nav-link">ToDo List</a></li>
     </ul>
 
     <ul class="navbar-nav navbar-collapse justify-content-end">
-      <li><a routerLink="/login" class="nav-link">Login</a></li>
-      <li><a routerLink="/logout" class="nav-link">Logout</a></li>
+      <li><a *ngIf="!authenticationService.isUserAuthenticated()" routerLink="/login" class="nav-link">Login</a></li>
+      <li><a *ngIf="authenticationService.isUserAuthenticated()" routerLink="/logout" class="nav-link">Logout</a></li>
     </ul>
 
   </nav>
