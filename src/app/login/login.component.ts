@@ -9,6 +9,8 @@ export class LoginComponent implements OnInit {
 
   usernameValue = 'defaultUsername';
   passwordValue = '';
+  validationErrorMessage = 'Invalid Credentials';
+  invalidLogin = false;
 
   constructor() { }
 
@@ -16,8 +18,11 @@ export class LoginComponent implements OnInit {
   }
 
   handleLogin(): void {
-    // obviously we would never output a password like this in real code
-    console.log(this.usernameValue + ': ' + this.passwordValue); // TODO: remove password output
+    if (this.usernameValue === 'fakeUsername' && this.passwordValue === 'qwerty1234') {
+      this.invalidLogin = false;
+    } else {
+      this.invalidLogin = true;
+    }
   }
 
 }

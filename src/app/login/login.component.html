@@ -1,9 +1,11 @@
-<label>Username:
-  <input type="text" name="username" [(ngModel)]="usernameValue">
-</label>
+<div>
+  <label>Username:
+    <input type="text" name="username" [(ngModel)]="usernameValue">
+  </label>
 
-<label>Password:
-  <input type="password" name="password" [(ngModel)]="passwordValue">
-</label>
+  <label>Password:
+    <input type="password" name="password" [(ngModel)]="passwordValue">
+  </label>
 
-<button (click)="handleLogin()">Login</button>
+  <button (click)="handleLogin()">Login</button> <small *ngIf="invalidLogin">{{validationErrorMessage}}</small>
+</div>
