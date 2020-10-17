@@ -1,6 +1,6 @@
 /*  // package dev.ericrybarczyk.angular.learning
-    Java explicitly declares a package. 
-    JS/TS equivalent: module - a file is a module (ES6)  and there is 
+    Java explicitly declares a package.
+    JS/TS equivalent: module - a file is a module (ES6)  and there is
                       no explicit declaration in code for this.
 */
 
@@ -9,7 +9,8 @@
     import { ClassOne, ClassTwo } from '../path/in/app/thing.component'
     Note: no need to include  the .ts file extension
 */
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
 
 /*  Java uses Annotations, while JS/TS uses Decorators. From the TS docs:
@@ -32,10 +33,12 @@ export class WelcomeComponent implements OnInit {
   /*  Java constructor uses class name as "method" name of the constructor.
       JS/TS uses the keyword constructor to define a ctor function/method
   */
-  constructor() { }
+  constructor(private route: ActivatedRoute) {
+  }
 
   // TS provides the type support, but type inference also happens automatically
-  message : string = 'string in TypeScript';
+  message = 'string in TypeScript';
+  usernameValue = '';
 
   messWithMessage(): void {
     this.message = 'modified message in TypeScript';
@@ -43,16 +46,17 @@ export class WelcomeComponent implements OnInit {
   }
 
   /*
-      Java method equivalent:  
-      
+      Java method equivalent:
+
       @Override
-      void ngOnInit() { 
+      void ngOnInit() {
         // code here
       }
 
       Below, TS provides the return type, not present in plain JS
   */
   ngOnInit(): void {
+    this.usernameValue = this.route.snapshot.params.name;
   }
 
 }

@@ -22,7 +22,7 @@ export class LoginComponent implements OnInit {
 
   handleLogin(): void {
     if (this.usernameValue === 'fakeUsername' && this.passwordValue === 'qwerty1234') {
-      this.router.navigate(['welcome']);
+      this.router.navigate(['welcome', this.usernameValue]);
       this.invalidLogin = false;
     } else {
       this.invalidLogin = true;
