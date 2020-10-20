@@ -15,6 +15,7 @@ export class WelcomeComponent implements OnInit {
 
   usernameValue = '';
   welcomeMessageFromService = '';
+  errorMessageFromService = '';
 
   ngOnInit(): void {
     this.usernameValue = this.route.snapshot.params.name;
@@ -22,12 +23,19 @@ export class WelcomeComponent implements OnInit {
 
   getWelcomeMessage(): void {
     this.service.executeHelloWorldBeanService().subscribe(
-      response => this.handleSuccessResponse(response)
+      response => this.handleSuccessResponse(response),
+      error => this.handleErrorResponse(error)
     );
   }
 
   handleSuccessResponse(response: HelloWorldBean): void {
+    this.errorMessageFromService = null;
     this.welcomeMessageFromService = response.message;
+  }
+
+  handleErrorResponse(error: any): void {
+    this.welcomeMessageFromService = null;
+    this.errorMessageFromService = error.message;
   }
 
 }

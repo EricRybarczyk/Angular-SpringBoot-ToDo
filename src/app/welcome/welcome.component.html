@@ -10,6 +10,9 @@
   <button (click)="getWelcomeMessage()" class="btn btn-primary">Click Me</button>
 </div>
 <br>
-<div class="container" *ngIf="welcomeMessageFromService">
-  <h3>Message Received: {{welcomeMessageFromService}}</h3>
+<div class="alert alert-success" *ngIf="welcomeMessageFromService">
+  <h4>Message Received: {{welcomeMessageFromService}}</h4>
+</div>
+<div class="alert alert-danger" *ngIf="errorMessageFromService">
+  <h4>Oops: {{errorMessageFromService}}</h4>
 </div>
