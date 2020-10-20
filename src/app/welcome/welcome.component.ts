@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {HelloWorldBean, WelcomeDataService} from '../service/data/welcome-data.service';
+import {HttpErrorResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-welcome',
@@ -22,7 +23,7 @@ export class WelcomeComponent implements OnInit {
   }
 
   getWelcomeMessage(): void {
-    this.service.executeHelloWorldBeanService().subscribe(
+    this.service.executeHelloWorldServiceWithPath(this.usernameValue).subscribe(
       response => this.handleSuccessResponse(response),
       error => this.handleErrorResponse(error)
     );
@@ -33,9 +34,9 @@ export class WelcomeComponent implements OnInit {
     this.welcomeMessageFromService = response.message;
   }
 
-  handleErrorResponse(error: any): void {
+  handleErrorResponse(error: HttpErrorResponse): void {
     this.welcomeMessageFromService = null;
-    this.errorMessageFromService = error.message;
+    this.errorMessageFromService = error.error.message;
   }
 
 }

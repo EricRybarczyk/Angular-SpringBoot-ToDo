@@ -16,8 +16,12 @@ export class WelcomeDataService {
 
   executeHelloWorldBeanService(): Observable<HelloWorldBean> {
     console.log('Executing Hello World Bean Service');
-    // console.log(this.http.get('http://localhost:8080/hello-world-bean/'));
     return this.http.get<HelloWorldBean>('http://localhost:8080/hello-world-bean/');
+  }
+
+  executeHelloWorldServiceWithPath(inputName: string): Observable<HelloWorldBean> {
+    console.log('Executing Hello World Bean with Path Service, inputName = ' + inputName);
+    return this.http.get<HelloWorldBean>(`http://localhost:8080/hello-world-bean/path-var/${inputName}`);
   }
 
 }
