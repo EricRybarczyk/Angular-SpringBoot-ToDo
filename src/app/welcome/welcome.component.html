@@ -3,3 +3,13 @@
 <div class="container">
   Hello {{usernameValue}}, you can manage your <a routerLink="/todos">To-Do List</a>
 </div>
+<br>
+<div class="container">
+  Click to test the API call
+  <br>
+  <button (click)="getWelcomeMessage()" class="btn btn-primary">Click Me</button>
+</div>
+<br>
+<div class="container" *ngIf="welcomeMessageFromService">
+  <h3>Message Received: {{welcomeMessageFromService}}</h3>
+</div>
