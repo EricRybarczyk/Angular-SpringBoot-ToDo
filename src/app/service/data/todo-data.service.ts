@@ -15,6 +15,10 @@ export class TodoDataService {
     return this.http.get<Todo[]>(`http://localhost:8080/users/${username}/todos`);
   }
 
+  retrieveToDoItem(username: string, id: number): Observable<Todo> {
+    return this.http.get<Todo>(`http://localhost:8080/users/${username}/todos/${id}`);
+  }
+
   deleteToDoItem(username: string, id: number): Observable<object> {
     return this.http.delete(`http://localhost:8080/users/${username}/todos/${id}`);
   }
