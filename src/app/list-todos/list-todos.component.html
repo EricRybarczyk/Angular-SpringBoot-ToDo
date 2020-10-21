@@ -6,6 +6,7 @@
       <th>Description</th>
       <th>Target Date</th>
       <th>Complete?</th>
+      <th>Actions</th>
     </tr>
     </thead>
     <tbody>
@@ -13,7 +14,12 @@
       <td>{{todo.description}}</td>
       <td>{{todo.targetDate | date}}</td>
       <td>{{todo.done}}</td>
+      <td><button class="btn btn-warning" (click)="deleteToDo(todo.id)">Delete</button> </td>
     </tr>
     </tbody>
   </table>
+</div>
+
+<div class="alert alert-success" *ngIf="responseMessage">
+  <h4>Message Received: {{responseMessage}}</h4>
 </div>

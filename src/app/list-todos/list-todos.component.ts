@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {TodoDataService} from '../service/data/todo-data.service';
+import {Observable} from 'rxjs';
 
 export class Todo {
   constructor(
@@ -16,13 +17,27 @@ export class Todo {
 })
 export class ListTodosComponent implements OnInit {
   todos = [];
+  responseMessage: string;
 
   constructor(private toDoService: TodoDataService) { }
 
   ngOnInit(): void {
+    this.getToDoList();
+  }
+
+  private getToDoList(): void {
     this.toDoService.retrieveAllToDoItems('demouser').subscribe(
       response => {
         this.todos = response;
+      }
+    );
+  }
+
+  deleteToDo(id: number): void {
+    this.toDoService.deleteToDoItem('demouser', id).subscribe(
+      response => {
+        this.responseMessage = `Delete of ToDo ${id} successful`;
+        this.getToDoList();
       }
     );
   }
