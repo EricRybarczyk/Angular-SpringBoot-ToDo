@@ -22,4 +22,8 @@ export class TodoDataService {
   deleteToDoItem(username: string, id: number): Observable<object> {
     return this.http.delete(`http://localhost:8080/users/${username}/todos/${id}`);
   }
+
+  updateToDoItem(username: string, id: number, todo: Todo): Observable<Todo> {
+    return this.http.put<Todo>(`http://localhost:8080/users/${username}/todos/${id}`, todo);
+  }
 }
