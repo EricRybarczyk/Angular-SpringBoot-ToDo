@@ -26,4 +26,8 @@ export class TodoDataService {
   updateToDoItem(username: string, id: number, todo: Todo): Observable<Todo> {
     return this.http.put<Todo>(`http://localhost:8080/users/${username}/todos/${id}`, todo);
   }
+
+  createToDoItem(username: string, todo: Todo): Observable<Todo> {
+    return this.http.post<Todo>(`http://localhost:8080/users/${username}/todos/`, todo);
+  }
 }

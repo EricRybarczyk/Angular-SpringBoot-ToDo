@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {TodoDataService} from '../service/data/todo-data.service';
-import {Observable} from 'rxjs';
 import {Router} from '@angular/router';
 
 export class Todo {
@@ -9,6 +8,9 @@ export class Todo {
     public description: string,
     public done: boolean,
     public targetDate: Date) { }
+  public toString(): string {
+    return '[Todo {id(' + typeof this.id + ')=' + this.id + '},{description (' + typeof this.description + ')=' + this.description + '}]';
+  }
 }
 
 @Component({
@@ -32,6 +34,10 @@ export class ListTodosComponent implements OnInit {
         this.todos = response;
       }
     );
+  }
+
+  newToDoItem(): void {
+    this.router.navigate(['todos', -1]);
   }
 
   updateToDo(id: number): void {

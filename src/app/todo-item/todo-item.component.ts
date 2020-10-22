@@ -12,23 +12,39 @@ export class TodoItemComponent implements OnInit {
   id: number;
   todo: Todo;
 
-  constructor(private route: ActivatedRoute, private router: Router, private toDoService: TodoDataService) { }
+  constructor(private toDoService: TodoDataService, private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.params.id;
-    this.todo = new Todo(-1, '', false, new Date()); // default for binding until the async call returns
-    this.toDoService.retrieveToDoItem('demouser', this.id).subscribe(
-      data => this.todo = data
-    );
+    this.id = Number(this.route.snapshot.params.id); //  as number;
+    this.todo = new Todo(this.id, '', false, new Date()); // default for create new item, and also binding for update until the async call returns
+    console.log('INIT todo object: ' + this.todo);
+    // tslint:disable-next-line:triple-equals // we want type conversion in this case, not strict equality
+    if (this.id != -1) {
+      this.toDoService.retrieveToDoItem('demouser', this.id).subscribe(
+        data => this.todo = data
+      );
+    }
   }
 
   saveToDoItem(): void {
-    this.toDoService.updateToDoItem('demouser', this.id, this.todo).subscribe(
-      data => {
-        console.log('ToDo item ' + data.id + ' updated');
-        this.router.navigate(['todos']);
-      }
-    );
+    console.log('SAVE todo object: ' + this.todo);
+    if (this.id === -1) {
+      this.toDoService.createToDoItem('demouser', this.todo).subscribe(
+        data => {
+          console.log('ToDo item created');
+          console.log(data);
+          this.router.navigate(['todos']);
+        }
+      );
+    }
+    else {
+      this.toDoService.updateToDoItem('demouser', this.id, this.todo).subscribe(
+        data => {
+          console.log('ToDo item ' + data.id + ' updated');
+          this.router.navigate(['todos']);
+        }
+      );
+    }
   }
 
 }
