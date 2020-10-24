@@ -13,7 +13,7 @@ export class HttpInterceptorAuthenticationService implements HttpInterceptor{
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const authenticationToken = this.authenticationService.getAuthenticationToken();
     const username = this.authenticationService.getAuthenticatedUser();
-    console.log('HttpInterceptorBasicAuthService - Authorization header value: ' + authenticationToken);
+    console.log('HttpInterceptorAuthenticationService - Authorization header value: ' + authenticationToken);
     if (authenticationToken && username) {
       // can't directly modify the request so we clone and add the Authorization header
       request = request.clone({

@@ -11,29 +11,26 @@ import {API_URL} from '../../app.constants';
 })
 export class TodoDataService {
 
-  username: string;
-
   constructor(private http: HttpClient, private authenticationService: AuthenticationService) {
-    this.username = authenticationService.getAuthenticatedUser();
   }
 
   retrieveAllToDoItems(): Observable<Todo[]> {
-    return this.http.get<Todo[]>(`${API_URL}/users/${this.username}/todos`);
+    return this.http.get<Todo[]>(`${API_URL}/users/${this.authenticationService.getAuthenticatedUser()}/todos`);
   }
 
   retrieveToDoItem(id: number): Observable<Todo> {
-    return this.http.get<Todo>(`${API_URL}/users/${this.username}/todos/${id}`);
+    return this.http.get<Todo>(`${API_URL}/users/${this.authenticationService.getAuthenticatedUser()}/todos/${id}`);
   }
 
   deleteToDoItem(id: number): Observable<object> {
-    return this.http.delete(`${API_URL}/users/${this.username}/todos/${id}`);
+    return this.http.delete(`${API_URL}/users/${this.authenticationService.getAuthenticatedUser()}/todos/${id}`);
   }
 
   updateToDoItem(id: number, todo: Todo): Observable<Todo> {
-    return this.http.put<Todo>(`${API_URL}/users/${this.username}/todos/${id}`, todo);
+    return this.http.put<Todo>(`${API_URL}/users/${this.authenticationService.getAuthenticatedUser()}/todos/${id}`, todo);
   }
 
   createToDoItem(todo: Todo): Observable<Todo> {
-    return this.http.post<Todo>(`${API_URL}/users/${this.username}/todos/`, todo);
+    return this.http.post<Todo>(`${API_URL}/users/${this.authenticationService.getAuthenticatedUser()}/todos/`, todo);
   }
 }
