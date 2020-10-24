@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
-import {BasicAuthenticationService} from '../service/auth/basic-authentication.service';
+import {AuthenticationService} from '../service/auth/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -15,14 +15,14 @@ export class LoginComponent implements OnInit {
   invalidLogin = false;
 
   // dependency injection is baked-in to Angular
-  constructor(private router: Router, private authenticationService: BasicAuthenticationService) {
+  constructor(private router: Router, private authenticationService: AuthenticationService) {
   }
 
   ngOnInit(): void {
   }
 
   handleLogin(): void {
-    console.log('Calling Angular authentication service');
+    console.log('Calling Angular JWT authentication service');
     this.authenticationService.authenticate(this.usernameValue, this.passwordValue).subscribe(
       data => {
         console.log('Success response from Angular authentication service...');

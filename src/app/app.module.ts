@@ -13,7 +13,7 @@ import { FooterComponent } from './footer/footer.component';
 import { LogoutComponent } from './logout/logout.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { TodoItemComponent } from './todo-item/todo-item.component';
-import {HttpInterceptorBasicAuthService} from './service/http/http-interceptor-basic-auth.service';
+import {HttpInterceptorAuthenticationService} from './service/http/http-interceptor-authentication.service';
 
 @NgModule({
   declarations: [
@@ -34,7 +34,7 @@ import {HttpInterceptorBasicAuthService} from './service/http/http-interceptor-b
     HttpClientModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorBasicAuthService, multi: true }
+    { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorAuthenticationService, multi: true }
   ],
   bootstrap: [AppComponent]
 })

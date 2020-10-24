@@ -1,9 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 
-import { BasicAuthenticationService } from './basic-authentication.service';
+import { AuthenticationService } from './authentication.service';
 
-describe('BasicAuthenticationService', () => {
-  let service: BasicAuthenticationService;
+describe('AuthenticationService', () => {
+  let service: AuthenticationService;
   const KEY_AUTHENTICATED_USER = 'authenticatedUser';
   const VALID_USERNAME = 'demouser';
   const INVALID_USERNAME = 'qwerty';
@@ -12,7 +12,7 @@ describe('BasicAuthenticationService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(BasicAuthenticationService);
+    service = TestBed.inject(AuthenticationService);
 
     // mock SessionStorage
     const valueStore = {};

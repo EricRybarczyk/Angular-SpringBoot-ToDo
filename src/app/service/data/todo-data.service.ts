@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {Todo} from '../../list-todos/list-todos.component';
-import {BasicAuthenticationService} from '../auth/basic-authentication.service';
+import {AuthenticationService} from '../auth/authentication.service';
 import {API_URL} from '../../app.constants';
 
 
@@ -13,7 +13,7 @@ export class TodoDataService {
 
   username: string;
 
-  constructor(private http: HttpClient, private authenticationService: BasicAuthenticationService) {
+  constructor(private http: HttpClient, private authenticationService: AuthenticationService) {
     this.username = authenticationService.getAuthenticatedUser();
   }
 
