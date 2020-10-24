@@ -20,7 +20,7 @@ export class TodoItemComponent implements OnInit {
     console.log('INIT todo object: ' + this.todo);
     // tslint:disable-next-line:triple-equals // we want type conversion in this case, not strict equality
     if (this.id != -1) {
-      this.toDoService.retrieveToDoItem('demouser', this.id).subscribe(
+      this.toDoService.retrieveToDoItem(this.id).subscribe(
         data => this.todo = data
       );
     }
@@ -29,7 +29,7 @@ export class TodoItemComponent implements OnInit {
   saveToDoItem(): void {
     console.log('SAVE todo object: ' + this.todo);
     if (this.id === -1) {
-      this.toDoService.createToDoItem('demouser', this.todo).subscribe(
+      this.toDoService.createToDoItem(this.todo).subscribe(
         data => {
           console.log('ToDo item created');
           console.log(data);
@@ -38,7 +38,7 @@ export class TodoItemComponent implements OnInit {
       );
     }
     else {
-      this.toDoService.updateToDoItem('demouser', this.id, this.todo).subscribe(
+      this.toDoService.updateToDoItem(this.id, this.todo).subscribe(
         data => {
           console.log('ToDo item ' + data.id + ' updated');
           this.router.navigate(['todos']);

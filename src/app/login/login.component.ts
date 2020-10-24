@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
-import {HardcodedAuthenticationService} from '../service/hardcoded-authentication.service';
+import {BasicAuthenticationService} from '../service/auth/basic-authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -9,25 +9,33 @@ import {HardcodedAuthenticationService} from '../service/hardcoded-authenticatio
 })
 export class LoginComponent implements OnInit {
 
-  usernameValue = 'username';
+  usernameValue = '';
   passwordValue = '';
   validationErrorMessage = 'Invalid Credentials';
   invalidLogin = false;
 
   // dependency injection is baked-in to Angular
-  constructor(private router: Router, private authenticationService: HardcodedAuthenticationService) {
+  constructor(private router: Router, private authenticationService: BasicAuthenticationService) {
   }
 
   ngOnInit(): void {
   }
 
   handleLogin(): void {
-    if (this.authenticationService.authenticate(this.usernameValue, this.passwordValue)) {
-      this.router.navigate(['welcome', this.usernameValue]);
-      this.invalidLogin = false;
-    } else {
-      this.invalidLogin = true;
-    }
+    console.log('Calling Angular authentication service');
+    this.authenticationService.authenticate(this.usernameValue, this.passwordValue).subscribe(
+      data => {
+        console.log('Success response from Angular authentication service...');
+        console.log(data);
+        this.router.navigate(['welcome', this.usernameValue]);
+        this.invalidLogin = false;
+      },
+      error => {
+        console.log('Error response from Angular authentication service...');
+        console.log(error);
+        this.invalidLogin = true;
+      }
+    );
   }
 
 }

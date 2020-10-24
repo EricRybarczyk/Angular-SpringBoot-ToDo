@@ -1,18 +1,18 @@
 import { TestBed } from '@angular/core/testing';
 
-import { HardcodedAuthenticationService } from './hardcoded-authentication.service';
+import { BasicAuthenticationService } from './basic-authentication.service';
 
-describe('HardcodedAuthenticationService', () => {
-  let service: HardcodedAuthenticationService;
+describe('BasicAuthenticationService', () => {
+  let service: BasicAuthenticationService;
   const KEY_AUTHENTICATED_USER = 'authenticatedUser';
-  const VALID_USERNAME = 'username';
+  const VALID_USERNAME = 'demouser';
   const INVALID_USERNAME = 'qwerty';
   const VALID_PASSWORD = 'ng10';
   const INVALID_PASSWORD = 'xyz123';
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(HardcodedAuthenticationService);
+    service = TestBed.inject(BasicAuthenticationService);
 
     // mock SessionStorage
     const valueStore = {};
@@ -75,5 +75,4 @@ describe('HardcodedAuthenticationService', () => {
     expect(sessionStorage.getItem(KEY_AUTHENTICATED_USER)).toBeNull();
     expect(service.isUserAuthenticated()).toBeFalse();
   });
-
 });

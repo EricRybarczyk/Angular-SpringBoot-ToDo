@@ -29,7 +29,7 @@ export class ListTodosComponent implements OnInit {
   }
 
   private getToDoList(): void {
-    this.toDoService.retrieveAllToDoItems('demouser').subscribe(
+    this.toDoService.retrieveAllToDoItems().subscribe(
       response => {
         this.todos = response;
       }
@@ -45,7 +45,7 @@ export class ListTodosComponent implements OnInit {
 }
 
   deleteToDo(id: number): void {
-    this.toDoService.deleteToDoItem('demouser', id).subscribe(
+    this.toDoService.deleteToDoItem(id).subscribe(
       response => {
         this.responseMessage = `Delete of ToDo ${id} successful`;
         this.getToDoList();

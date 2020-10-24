@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {API_URL} from '../../app.constants';
 
 export class HelloWorldBean {
   constructor(public message: string) {
@@ -16,12 +17,12 @@ export class WelcomeDataService {
 
   executeHelloWorldBeanService(): Observable<HelloWorldBean> {
     console.log('Executing Hello World Bean Service');
-    return this.http.get<HelloWorldBean>('http://localhost:8080/hello-world-bean/');
+    return this.http.get<HelloWorldBean>(`${API_URL}/hello-world-bean/`);
   }
 
   executeHelloWorldServiceWithPath(inputName: string): Observable<HelloWorldBean> {
     console.log('Executing Hello World Bean with Path Service, inputName = ' + inputName);
-    return this.http.get<HelloWorldBean>(`http://localhost:8080/hello-world-bean/path-var/${inputName}`);
+    return this.http.get<HelloWorldBean>(`${API_URL}/hello-world-bean/path-var/${inputName}`);
   }
 
 }
